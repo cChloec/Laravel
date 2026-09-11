@@ -13,6 +13,7 @@
         <table class="table">
             <thead class="thead-dark">
                 <tr>
+                    <th>Edit</th>
                     <th>ID</th>
                     <th>Game</th>
                     <th>Platform</th>
@@ -24,6 +25,7 @@
             <tbody>
                 @foreach($games as $game)
                     <tr>
+                        <td><a href="/games/edit/{{ $game->id }}" class="btn btn-primary btn-sm">Edit</a></td>
                         <td>{{ $game->id }}</td>
                         <td>{{ $game->game_name }}</td>
                         <td>{{ $game->platform }}</td>

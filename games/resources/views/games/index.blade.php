@@ -13,6 +13,7 @@
         <table class="table">
             <thead class="thead-dark">
                 <tr>
+                    <th>Delete</th>
                     <th>Edit</th>
                     <th>ID</th>
                     <th>Game</th>
@@ -25,6 +26,12 @@
             <tbody>
                 @foreach($games as $game)
                     <tr>
+                        <td>
+                        <form action="/games/destroy/{{ $game->id }}" method="post">
+                        @csrf
+                        <button onclick="return confirm('Weet je het zeker?')" class="btn btn-danger btn-sm" type="submit">Delete</button>
+                        </form>
+                        </td>
                         <td><a href="/games/edit/{{ $game->id }}" class="btn btn-primary btn-sm">Edit</a></td>
                         <td>{{ $game->id }}</td>
                         <td>{{ $game->game_name }}</td>

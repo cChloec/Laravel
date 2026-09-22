@@ -1,13 +1,15 @@
 @extends('base')
 
+@section('title', '🎮 Game Collection')
 
+@section('content')
 
-@section('content') <a href="/games/create" class="btn btn-success mb-3">Add Game</a>
-
+<a href="/games/create" class="btn btn-success mb-3">Add Game</a>
 
 <table class="table">
     <thead class="thead-dark">
         <tr>
+            <th>Show</th>
             <th>Delete</th>
             <th>Edit</th>
             <th>ID</th>
@@ -19,23 +21,34 @@
     </thead>
 
     <tbody>
-        @php( $sum = 0 )
+        @php($sum = 0)
 
         @foreach($games as $game)
-            @php( $sum += $game->rating )
+            @php($sum += $game->rating)
 
             <tr>
                 <td>
-                    <form action="/games/destroy/{{ $game->id }}" method="post">
+                    <a href="/games/show/{{ $game->id }}"
+                       class="btn btn-info btn-sm">
+                        Show
+                    </a>
+                </td>
+
+                <td>
+                    <form action="/games/destroy/{{ $game->id }}"
+                          method="post">
                         @csrf
-                        <button onclick="return confirm('Weet je het zeker?')" class="btn btn-danger btn-sm" type="submit">
+                        <button onclick="return confirm('Weet je het zeker?')"
+                                class="btn btn-danger btn-sm"
+                                type="submit">
                             Delete
                         </button>
                     </form>
                 </td>
 
                 <td>
-                    <a href="/games/edit/{{ $game->id }}" class="btn btn-primary btn-sm">
+                    <a href="/games/edit/{{ $game->id }}"
+                       class="btn btn-primary btn-sm">
                         Edit
                     </a>
                 </td>
@@ -49,7 +62,9 @@
         @endforeach
 
         <tr>
-            <td colspan="6"><strong>Gemiddelde rating:</strong></td>
+            <td colspan="7">
+                <strong>Gemiddelde rating:</strong>
+            </td>
             <td>
                 <strong>
                     {{ count($games) > 0 ? number_format($sum / count($games), 1) : 0 }}/10
@@ -58,6 +73,5 @@
         </tr>
     </tbody>
 </table>
-
 
 @endsection

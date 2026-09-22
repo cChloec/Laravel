@@ -52,9 +52,10 @@ public function store(Request $request)
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        //
-    }
+{
+    $game = Game::find($id);
+    return view('games.show', ['game'=> $game]);
+}
 
     /**
      * Show the form for editing the specified resource.

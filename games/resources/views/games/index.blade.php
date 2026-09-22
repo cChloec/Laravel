@@ -1,10 +1,10 @@
 @extends('base')
 
-@section('title', '🎮 Game Collection')
+
 
 @section('content') <a href="/games/create" class="btn btn-success mb-3">Add Game</a>
 
-```
+
 <table class="table">
     <thead class="thead-dark">
         <tr>
@@ -58,6 +58,6 @@
         </tr>
     </tbody>
 </table>
-```
+
 
 @endsection

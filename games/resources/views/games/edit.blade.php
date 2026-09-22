@@ -1,10 +1,10 @@
 @extends('base')
 
-@section('title', '✏️ Edit Game')
+
 
 @section('content') <h1 class="display-4">✏️ Edit Game</h1>
 
-```
+
 <form method="post" action="/games/update/{{ $game->id }}">
     @csrf
 
@@ -30,6 +30,6 @@
 
     <button type="submit" class="btn btn-primary">Update</button>
 </form>
-```
+
 
 @endsection

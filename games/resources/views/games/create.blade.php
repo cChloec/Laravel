@@ -1,10 +1,10 @@
 @extends('base')
 
-@section('title', '🎮 Add Game')
+
 
 @section('content') <h1 class="display-4">🎮 Add Game</h1>
 
-```
+
 <form method="post" action="/games/store">
     @csrf
 
@@ -30,6 +30,6 @@
 
     <button type="submit" class="btn btn-success">Add Game</button>
 </form>
-```
+
 
 @endsection

@@ -12,7 +12,7 @@
             <strong>Platform:</strong>
             {{ $game->platform }}
         </p>
- 
+
         <p>
             <strong>Genre:</strong>
             {{ $game->genre }}

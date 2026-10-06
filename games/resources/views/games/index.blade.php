@@ -4,7 +4,8 @@
 
 @section('content')
 
-<a href="/games/create" class="btn btn-success mb-3">Add Game</a>
+@role('admin') <a href="/games/create" class="btn btn-success mb-3">Add Game</a>
+@endrole
 
 <table class="table">
     <thead class="thead-dark">
@@ -20,58 +21,65 @@
         </tr>
     </thead>
 
-    <tbody>
-        @php($sum = 0)
+<tbody>
+    @php($sum = 0)
 
-        @foreach($games as $game)
-            @php($sum += $game->rating)
+    @foreach($games as $game)
+        @php($sum += $game->rating)
 
-            <tr>
-                <td>
-                    <a href="/games/show/{{ $game->id }}"
-                       class="btn btn-info btn-sm">
-                        Show
-                    </a>
-                </td>
+        <tr>
+            <td>
+                <a href="/games/show/{{ $game->id }}"
+                   class="btn btn-info btn-sm">
+                    Show
+                </a>
+            </td>
 
-                <td>
+            <td>
+                @role('admin')
                     <form action="/games/destroy/{{ $game->id }}"
                           method="post">
                         @csrf
+
                         <button onclick="return confirm('Weet je het zeker?')"
                                 class="btn btn-danger btn-sm"
                                 type="submit">
                             Delete
                         </button>
                     </form>
-                </td>
+                @endrole
+            </td>
 
-                <td>
+            <td>
+                @role('admin')
                     <a href="/games/edit/{{ $game->id }}"
                        class="btn btn-primary btn-sm">
                         Edit
                     </a>
-                </td>
-
-                <td>{{ $game->id }}</td>
-                <td>{{ $game->game_name }}</td>
-                <td>{{ $game->platform }}</td>
-                <td>{{ $game->genre }}</td>
-                <td>{{ $game->rating }}/10</td>
-            </tr>
-        @endforeach
-
-        <tr>
-            <td colspan="7">
-                <strong>Gemiddelde rating:</strong>
+                @endrole
             </td>
-            <td>
-                <strong>
-                    {{ count($games) > 0 ? number_format($sum / count($games), 1) : 0 }}/10
-                </strong>
-            </td>
+
+            <td>{{ $game->id }}</td>
+            <td>{{ $game->game_name }}</td>
+            <td>{{ $game->platform }}</td>
+            <td>{{ $game->genre }}</td>
+            <td>{{ $game->rating }}/10</td>
         </tr>
-    </tbody>
+    @endforeach
+
+    <tr>
+        <td colspan="7">
+            <strong>Gemiddelde rating:</strong>
+        </td>
+
+        <td>
+            <strong>
+                {{ count($games) > 0 ? number_format($sum / count($games), 1) : 0 }}/10
+            </strong>
+        </td>
+    </tr>
+</tbody>
+
 </table>
 
 @endsection

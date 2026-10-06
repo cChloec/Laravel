@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RolePermissionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -85,6 +86,14 @@ Route::middleware(['auth', 'role:admin'])
 
         Route::delete('/rollen/{id}', [RoleController::class, 'destroy'])
             ->name('roles.destroy');
+
+
+        // Permissies aan rollen koppelen
+        Route::get('/rol-permissies', [RolePermissionController::class, 'index'])
+            ->name('role-permissions.index');
+
+        Route::put('/rol-permissies/{roleId}', [RolePermissionController::class, 'update'])
+            ->name('role-permissions.update');
     });
 
 require __DIR__.'/auth.php';

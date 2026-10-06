@@ -5,6 +5,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\UserRoleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -94,6 +95,14 @@ Route::middleware(['auth', 'role:admin'])
 
         Route::put('/rol-permissies/{roleId}', [RolePermissionController::class, 'update'])
             ->name('role-permissions.update');
+
+
+        // Rollen aan gebruikers koppelen
+        Route::get('/gebruiker-rollen', [UserRoleController::class, 'index'])
+            ->name('user-roles.index');
+
+        Route::put('/gebruiker-rollen/{userId}', [UserRoleController::class, 'update'])
+            ->name('user-roles.update');
     });
 
 require __DIR__.'/auth.php';
